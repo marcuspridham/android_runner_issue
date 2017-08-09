@@ -5,9 +5,11 @@ When using AndroidJUnitRunner 1.0.0 with Wiremock or AssertJ the following error
 
 Reverting back to AndroidJUnitRunner 0.5 will allow the test to be detected and run.
 
+Reported Issue: https://issuetracker.google.com/issues/64525881
+
 ## Using AndroidJUnitRunner 1.0.0
 
-Open the `build.gradle` and ensure that the 1.0.0 version is uncommented and that the 0.5 version is commented out.
+Open the `build.gradle` and ensure that the 1.0.0 version is uncommented and that the 0.5 version is commented.
 Like so:
 
 ```groovy
@@ -23,7 +25,7 @@ To run the test and see the failure execute the following command:
 
 ## Using AndroidJUnitRunner 0.5
 
-Open the `build.gradle` and ensure that the 0.5 version is commented and that the 0.5 version is uncommented.
+Open the `build.gradle` and ensure that the 1.0.0 version is commented and that the 0.5 version is uncommented.
 Like so:
 
 ```groovy
