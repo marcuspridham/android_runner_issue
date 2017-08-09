@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
+
+defaultTasks 'connectedDebugAndroidTest'
+
+dependencies {
+    androidTestCompile 'com.android.support.test:runner:1.0.0' // Does not work with Wiremock or AssertJ
+    //androidTestCompile 'com.android.support.test:runner:0.5' // Works with Wiremock and AssertJ
+
+    // AssertJ
+    //androidTestCompile group: "org.assertj", name: "assertj-core", version: "2.8.0" // Also causes no tests found error with the runner
+
+    //WireMock
+    androidTestCompile("com.github.tomakehurst:wiremock:2.7.1") {
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+        exclude group: 'org.ow2.asm', module: 'asm'
+        exclude group: 'org.json', module: 'json'
+    }
+    androidTestCompile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    androidTestCompile 'commons-io:commons-io:2.4'
+
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 26
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+}
